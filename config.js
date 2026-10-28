@@ -5,7 +5,7 @@ window.CONFIG = {
   // 1) Datos de tu proyecto de Supabase (Project Settings → API).
   //    Si los dejás vacíos, la app funciona en "modo demo"
   //    (los datos se guardan solo en tu teléfono, no se comparten).
-  SUPABASE_URL: "https://htkoqgplsbejwibbbiay.supabase.co/rest/v1/",
+  SUPABASE_URL: "https://htkoqgplsbejwibbbiay.supabase.co",
   SUPABASE_ANON_KEY: "sb_publishable_3uOgje0l6MQtLxfqcpLElg_55GDUVTs",
 
   // 2) Código de acceso compartido. Dejalo vacío ("") para no pedir código.
