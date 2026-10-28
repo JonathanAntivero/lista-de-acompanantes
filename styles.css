@@ -1,0 +1,255 @@
+:root {
+  --azul: #1f4e79;
+  --azul-claro: #e8f0f8;
+  --verde: #2e7d4f;
+  --verde-claro: #e6f4ec;
+  --gris: #6b7280;
+  --borde: #d9dee5;
+  --fondo: #f6f8fb;
+  --texto: #1b2430;
+  --rojo: #b3261e;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  min-height: 100vh;
+  padding-bottom: 70px;
+}
+
+.top {
+  background: var(--azul);
+  color: #fff;
+  padding: calc(14px + env(safe-area-inset-top)) 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.top h1 { margin: 0; font-size: 1.15rem; }
+.sub { margin: 2px 0 10px; font-size: .9rem; opacity: .9; }
+
+.semana-nav { display: flex; gap: 8px; margin-bottom: 10px; }
+.semana-nav .ghost { flex: 0 0 auto; }
+.semana-nav #btnHoy { flex: 1; }
+
+.ghost {
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.ghost:active { background: rgba(255,255,255,.3); }
+
+.tabs { display: flex; gap: 4px; }
+.tab {
+  flex: 1;
+  background: transparent;
+  color: rgba(255,255,255,.8);
+  border: 0;
+  border-bottom: 3px solid transparent;
+  padding: 10px 0;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.tab.activa { color: #fff; border-bottom-color: #fff; font-weight: 600; }
+
+main { max-width: 640px; margin: 0 auto; padding: 14px 14px 20px; }
+
+.aviso {
+  background: #fff4e5;
+  border: 1px solid #f2c27a;
+  color: #7a4a00;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  font-size: .9rem;
+}
+
+/* Selector de días */
+.dias {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+}
+.dias::-webkit-scrollbar { display: none; }
+
+.dia {
+  flex: 0 0 auto;
+  min-width: 62px;
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 8px 6px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--texto);
+}
+.dia small { display: block; color: var(--gris); font-size: .75rem; text-transform: uppercase; }
+.dia strong { display: block; font-size: 1.15rem; }
+.dia .pto {
+  display: inline-block;
+  min-width: 18px;
+  margin-top: 2px;
+  font-size: .72rem;
+  background: var(--verde);
+  color: #fff;
+  border-radius: 9px;
+  padding: 0 5px;
+}
+.dia.activo { background: var(--azul); color: #fff; border-color: var(--azul); }
+.dia.activo small { color: rgba(255,255,255,.85); }
+.dia.pasado { opacity: .45; }
+.dia.hoy:not(.activo) { border-color: var(--azul); }
+
+.ayuda { color: var(--gris); font-size: .85rem; margin: 10px 2px; }
+
+/* Horarios */
+.horas { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+
+.hora {
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.hora .h { font-weight: 700; color: var(--azul); min-width: 50px; padding-top: 4px; }
+.hora .gente { flex: 1; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-height: 32px; }
+.hora .vacio { color: var(--gris); font-size: .9rem; }
+
+.chip {
+  background: var(--azul-claro);
+  color: var(--azul);
+  border: 0;
+  border-radius: 16px;
+  padding: 5px 10px;
+  font-size: .9rem;
+}
+.chip.mio {
+  background: var(--verde);
+  color: #fff;
+  cursor: pointer;
+}
+.chip.mio::after { content: " ✕"; font-size: .8rem; }
+
+.btn-anotar {
+  background: #fff;
+  border: 1px dashed var(--azul);
+  color: var(--azul);
+  border-radius: 16px;
+  padding: 5px 12px;
+  font-size: .9rem;
+  cursor: pointer;
+}
+.btn-anotar:active { background: var(--azul-claro); }
+.hora.pasada { opacity: .5; }
+.hora.pasada .btn-anotar, .hora.pasada .chip.mio { pointer-events: none; }
+
+/* Resumen */
+.res-dia {
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+.res-dia h3 { margin: 0 0 6px; font-size: 1rem; color: var(--azul); text-transform: capitalize; }
+.res-linea { display: flex; gap: 10px; padding: 4px 0; font-size: .95rem; border-top: 1px solid #eef1f5; }
+.res-linea:first-of-type { border-top: 0; }
+.res-linea b { min-width: 50px; }
+.res-vacio { color: var(--gris); font-size: .9rem; }
+.tel { color: var(--gris); font-size: .8rem; }
+
+.primario {
+  width: 100%;
+  background: var(--azul);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.primario:active { filter: brightness(.9); }
+
+.link {
+  background: none;
+  border: 0;
+  color: var(--azul);
+  text-decoration: underline;
+  font-size: .9rem;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+
+.pie {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background: #fff;
+  border-top: 1px solid var(--borde);
+  padding: 8px 14px calc(8px + env(safe-area-inset-bottom));
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .9rem;
+}
+#miNombre { font-weight: 600; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Diálogos */
+dialog {
+  border: 0;
+  border-radius: 14px;
+  padding: 18px;
+  width: min(92vw, 380px);
+  box-shadow: 0 10px 40px rgba(0,0,0,.25);
+}
+dialog::backdrop { background: rgba(0,0,0,.45); }
+dialog h2 { margin: 0 0 10px; font-size: 1.2rem; }
+dialog label { display: block; margin: 10px 0; font-size: .9rem; color: var(--gris); }
+dialog input {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  color: var(--texto);
+}
+.acciones { margin-top: 14px; }
+.chico { margin: 0; color: var(--gris); font-size: .9rem; }
+.error { color: var(--rojo); font-size: .9rem; margin: 6px 0 0; }
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 84px;
+  transform: translate(-50%, 20px);
+  background: #1b2430;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-size: .9rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s, transform .2s;
+  max-width: 90vw;
+  text-align: center;
+  z-index: 30;
+}
+.toast.visible { opacity: 1; transform: translate(-50%, 0); }
+
+[hidden] { display: none !important; }

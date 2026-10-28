@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lista de acompañantes</title>
+  <meta name="description" content="Anotá tu disponibilidad para acompañar a los misioneros.">
+  <meta name="theme-color" content="#1f4e79">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Lista de acompañantes</h1>
+    <p id="semanaTxt" class="sub"></p>
+    <div class="semana-nav">
+      <button id="btnPrev" class="ghost" aria-label="Semana anterior">‹</button>
+      <button id="btnHoy" class="ghost">Esta semana</button>
+      <button id="btnNext" class="ghost" aria-label="Semana siguiente">›</button>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button id="tabAnotar" class="tab activa" role="tab">Anotarme</button>
+      <button id="tabResumen" class="tab" role="tab">Resumen</button>
+    </nav>
+  </header>
+
+  <main>
+    <div id="aviso" class="aviso" hidden></div>
+
+    <section id="vistaAnotar">
+      <div id="dias" class="dias" role="tablist" aria-label="Días de la semana"></div>
+      <p id="ayuda" class="ayuda">Tocá un horario para anotarte. Tocá tu nombre para quitarte.</p>
+      <ul id="horas" class="horas"></ul>
+    </section>
+
+    <section id="vistaResumen" hidden>
+      <div id="resumen"></div>
+      <button id="btnCopiar" class="primario">Copiar resumen para WhatsApp</button>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <span id="miNombre"></span>
+    <button id="btnCambiarNombre" class="link">Cambiar mis datos</button>
+    <button id="btnInstalar" class="link" hidden>Instalar app</button>
+  </footer>
+
+  <!-- Diálogo de datos personales -->
+  <dialog id="dlgDatos">
+    <form method="dialog" id="formDatos">
+      <h2>¿Quién sos?</h2>
+      <label>Nombre
+        <input id="inNombre" required maxlength="40" autocomplete="name" placeholder="Ej: Hno. Pérez">
+      </label>
+      <label>WhatsApp (opcional)
+        <input id="inTel" type="tel" maxlength="25" autocomplete="tel" placeholder="Ej: +57 300 000 0000">
+      </label>
+      <div class="acciones">
+        <button type="submit" class="primario">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Diálogo de código de acceso -->
+  <dialog id="dlgCodigo">
+    <form method="dialog" id="formCodigo">
+      <h2>Código de acceso</h2>
+      <p class="chico">Pedile el código al líder del grupo.</p>
+      <label>Código
+        <input id="inCodigo" required autocomplete="off">
+      </label>
+      <p id="errCodigo" class="error" hidden>Código incorrecto.</p>
+      <div class="acciones">
+        <button type="submit" class="primario">Entrar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
